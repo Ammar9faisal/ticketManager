@@ -1,8 +1,90 @@
 ﻿@{
-    ViewData["Title"] = "Home Page";
+    ViewData["Title"] = "Dashboard";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+<!-- Hero Section -->
+<div class="hero-section text-center">
+    <div class="container">
+        <h1>Ticket Management System</h1>
+        <p>Manage and track your support tickets efficiently</p>
+    </div>
+</div>
+
+<div class="container">
+    <!-- Stats Row -->
+    <div class="stats-container">
+        <div class="row g-4">
+            <div class="col-md-3 col-sm-6">
+                <div class="stat-card">
+                    <div class="stat-icon primary">
+                        📋
+                    </div>
+                    <div class="stat-number">0</div>
+                    <div class="stat-label">Total Tickets</div>
+                </div>
+            </div>
+            <div class="col-md-3 col-sm-6">
+                <div class="stat-card">
+                    <div class="stat-icon success">
+                        ✓
+                    </div>
+                    <div class="stat-number">0</div>
+                    <div class="stat-label">Resolved</div>
+                </div>
+            </div>
+            <div class="col-md-3 col-sm-6">
+                <div class="stat-card">
+                    <div class="stat-icon warning">
+                        ⏱
+                    </div>
+                    <div class="stat-number">0</div>
+                    <div class="stat-label">In Progress</div>
+                </div>
+            </div>
+            <div class="col-md-3 col-sm-6">
+                <div class="stat-card">
+                    <div class="stat-icon danger">
+                        🔴
+                    </div>
+                    <div class="stat-number">0</div>
+                    <div class="stat-label">Open</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Quick Actions -->
+    <h2 class="mb-4 fw-bold">Quick Actions</h2>
+    <div class="row g-4 mb-5">
+        <div class="col-md-4">
+            <div class="action-card">
+                <div class="action-icon">
+                    ➕
+                </div>
+                <h3>Create New Ticket</h3>
+                <p>Submit a new support request or issue</p>
+                <a asp-controller="Ticket" asp-action="Create" class="btn btn-primary">Create Ticket</a>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="action-card">
+                <div class="action-icon">
+                    📊
+                </div>
+                <h3>View All Tickets</h3>
+                <p>Browse and manage all support tickets</p>
+                <a asp-controller="Ticket" asp-action="Index" class="btn btn-outline-primary">View Tickets</a>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="action-card">
+                <div class="action-icon">
+                    🔍
+                </div>
+                <h3>Search Tickets</h3>
+                <p>Find specific tickets by ID or keywords</p>
+                <a href="#" class="btn btn-outline-primary">Search</a>
+            </div>
+        </div>
+    </div>
 </div>
