@@ -5,27 +5,64 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using ticketManager.Data;
+using ticketManager.Models;
 
 namespace ticketManager.Controllers
 {
     public class TicketController : Controller
     {
-       public IActionResult Index()
-    {
-        return View();
-    }
+        private readonly TicketDbContext _context;
 
-    public IActionResult Create() //returns the Create view for task
-    {
-        return View();
-    }
+        public TicketController(TicketDbContext context)
+        {
+            _context = context;
+        }
 
-    [HttpPost]
-    public IActionResult Create(string title, string description, TicketPriority priority) //creates a new ticket based on user input
-    {
-        Ticket newTicket = new Ticket(title, description, priority);
-        // Here you would typically save the ticket to a database
-        return RedirectToAction("Details", new { id = newTicket.Id });
-    }
+        // GET: /Ticket - Show all tickets
+        public IActionResult Index()
+        {
+            var tickets = _context.Tickets.ToList();
+            return View(tickets);
+        }
+
+        // GET: /Ticket/Create - Show create form
+        public IActionResult Create()
+        {
+            return View();
+        }
+
+        // POST: /Ticket/Create - Handle form submission
+        [HttpPost]
+        public IActionResult Create(string title, string description, TicketPriority priority)
+        {
+            var ticket = new Ticket(title, description, priority);
+            _context.Tickets.Add(ticket);
+            _context.SaveChanges();
+            return RedirectToAction("Index");
+        }
+
+        // GET: /Ticket/Details/{id}
+        public IActionResult Details(Guid id)
+        {
+            var ticket = _context.Tickets.Find(id);
+            if (ticket == null)
+                return NotFound();
+            
+            return View(ticket);
+        }
+
+        // POST: /Ticket/Delete/{id}
+        [HttpPost]
+        public IActionResult Delete(Guid id)
+        {
+            var ticket = _context.Tickets.Find(id);
+            if (ticket != null)
+            {
+                _context.Tickets.Remove(ticket);
+                _context.SaveChanges();
+            }
+            return RedirectToAction("Index");
+        }
     }
 }

@@ -1,5 +1,7 @@
 public class Ticket
 {
+    public Ticket() { } // Required for Entity Framework
+
     public Ticket(string title, string description, TicketPriority priority) //ticket class takes title, description as parameters
     {
 

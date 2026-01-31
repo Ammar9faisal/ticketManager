@@ -1,89 +1,78 @@
 ﻿@{
-    ViewData["Title"] = "Dashboard";
+    ViewData["Title"] = "Login";
 }
 
-<!-- Hero Section -->
-<div class="hero-section text-center">
-    <div class="container">
-        <h1>Ticket Management System</h1>
-        <p>Manage and track your support tickets efficiently</p>
-    </div>
-</div>
+<div class="container-fluid vh-100 d-flex align-items-center justify-content-center" style="background: linear-gradient(135deg, #4f46e5 0%, #6366f1 100%);">
+    <div class="row w-100">
+        <div class="col-md-8 col-lg-6 mx-auto">
+            <div class="text-center mb-4">
+                <h1 class="display-4 text-white fw-bold mb-2">🎫 TicketManager</h1>
+                <p class="text-white opacity-75">Manage your support tickets efficiently</p>
+            </div>
 
-<div class="container">
-    <!-- Stats Row -->
-    <div class="stats-container">
-        <div class="row g-4">
-            <div class="col-md-3 col-sm-6">
-                <div class="stat-card">
-                    <div class="stat-icon primary">
-                        📋
-                    </div>
-                    <div class="stat-number">0</div>
-                    <div class="stat-label">Total Tickets</div>
-                </div>
-            </div>
-            <div class="col-md-3 col-sm-6">
-                <div class="stat-card">
-                    <div class="stat-icon success">
-                        ✓
-                    </div>
-                    <div class="stat-number">0</div>
-                    <div class="stat-label">Resolved</div>
-                </div>
-            </div>
-            <div class="col-md-3 col-sm-6">
-                <div class="stat-card">
-                    <div class="stat-icon warning">
-                        ⏱
-                    </div>
-                    <div class="stat-number">0</div>
-                    <div class="stat-label">In Progress</div>
-                </div>
-            </div>
-            <div class="col-md-3 col-sm-6">
-                <div class="stat-card">
-                    <div class="stat-icon danger">
-                        🔴
-                    </div>
-                    <div class="stat-number">0</div>
-                    <div class="stat-label">Open</div>
-                </div>
-            </div>
-        </div>
-    </div>
+            <div class="card shadow-lg border-0 rounded-4">
+                <div class="card-body p-5">
+                    <!-- Tabs for Login/Signup -->
+                    <ul class="nav nav-pills nav-fill mb-4" id="authTabs" role="tablist">
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link active" id="login-tab" data-bs-toggle="pill" data-bs-target="#login" type="button" role="tab">Login</button>
+                        </li>
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link" id="signup-tab" data-bs-toggle="pill" data-bs-target="#signup" type="button" role="tab">Sign Up</button>
+                        </li>
+                    </ul>
 
-    <!-- Quick Actions -->
-    <h2 class="mb-4 fw-bold">Quick Actions</h2>
-    <div class="row g-4 mb-5">
-        <div class="col-md-4">
-            <div class="action-card">
-                <div class="action-icon">
-                    ➕
+                    <div class="tab-content">
+                        <!-- Login Form -->
+                        <div class="tab-pane fade show active" id="login" role="tabpanel">
+                            <form asp-controller="Ticket" asp-action="Index" method="get">
+                                <div class="mb-3">
+                                    <label for="loginEmail" class="form-label">Email</label>
+                                    <input type="email" class="form-control form-control-lg" id="loginEmail" name="email" placeholder="your@email.com" required>
+                                </div>
+                                <div class="mb-4">
+                                    <label for="loginPassword" class="form-label">Password</label>
+                                    <input type="password" class="form-control form-control-lg" id="loginPassword" name="password" placeholder="••••••••" required>
+                                </div>
+                                <div class="mb-3 form-check">
+                                    <input type="checkbox" class="form-check-input" id="rememberMe">
+                                    <label class="form-check-label" for="rememberMe">Remember me</label>
+                                </div>
+                                <button type="submit" class="btn btn-primary btn-lg w-100">Login</button>
+                            </form>
+                            <div class="text-center mt-3">
+                                <a href="#" class="text-muted small">Forgot password?</a>
+                            </div>
+                        </div>
+
+                        <!-- Signup Form -->
+                        <div class="tab-pane fade" id="signup" role="tabpanel">
+                            <form asp-controller="Ticket" asp-action="Index" method="get">
+                                <div class="mb-3">
+                                    <label for="signupName" class="form-label">Full Name</label>
+                                    <input type="text" class="form-control form-control-lg" id="signupName" name="name" placeholder="John Doe" required>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="signupEmail" class="form-label">Email</label>
+                                    <input type="email" class="form-control form-control-lg" id="signupEmail" name="email" placeholder="your@email.com" required>
+                                </div>
+                                <div class="mb-4">
+                                    <label for="signupPassword" class="form-label">Password</label>
+                                    <input type="password" class="form-control form-control-lg" id="signupPassword" name="password" placeholder="••••••••" required>
+                                </div>
+                                <div class="mb-3 form-check">
+                                    <input type="checkbox" class="form-check-input" id="agreeTerms" required>
+                                    <label class="form-check-label" for="agreeTerms">I agree to the Terms & Conditions</label>
+                                </div>
+                                <button type="submit" class="btn btn-primary btn-lg w-100">Create Account</button>
+                            </form>
+                        </div>
+                    </div>
                 </div>
-                <h3>Create New Ticket</h3>
-                <p>Submit a new support request or issue</p>
-                <a asp-controller="Ticket" asp-action="Create" class="btn btn-primary">Create Ticket</a>
             </div>
-        </div>
-        <div class="col-md-4">
-            <div class="action-card">
-                <div class="action-icon">
-                    📊
-                </div>
-                <h3>View All Tickets</h3>
-                <p>Browse and manage all support tickets</p>
-                <a asp-controller="Ticket" asp-action="Index" class="btn btn-outline-primary">View Tickets</a>
-            </div>
-        </div>
-        <div class="col-md-4">
-            <div class="action-card">
-                <div class="action-icon">
-                    🔍
-                </div>
-                <h3>Search Tickets</h3>
-                <p>Find specific tickets by ID or keywords</p>
-                <a href="#" class="btn btn-outline-primary">Search</a>
+
+            <div class="text-center mt-4">
+                <p class="text-white small">&copy; 2026 TicketManager. All rights reserved.</p>
             </div>
         </div>
     </div>
